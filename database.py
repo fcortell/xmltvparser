@@ -1,18 +1,21 @@
 from mysql.connector import errorcode, connect, Error
 
 from logger import info, critical, error
+from ConfigParser import SafeConfigParser
 
+parser = SafeConfigParser()
+parser.read('config.ini')
 
 class Database:
     # database connection config
     __config = {
-        'user': 'xmltvparser',
-        'password': 'Ndgfhcth2017',
-        'host': 'localhost',
-        'database': 'tvservice',
-        'raise_on_warnings': True,
-        'charset': 'utf8',
-        'get_warnings': True
+        'user': parser.get('db', 'user'),
+        'password': parser.get('db', 'password'),
+        'host': parser.get('db', 'host'),
+        'database': parser.get('db', 'database'),
+        'raise_on_warnings': parser.getboolean('db', 'raise_on_warnings'),
+        'charset': parser.get('db', 'charset'),
+        'get_warnings': parser.getboolean('db', 'get_warnings')
     }
 
     # initial tables
