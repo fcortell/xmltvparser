@@ -1,8 +1,8 @@
-# Xml TV Parser #
+# Xml TV Parser for TVGuía App #
 
-This application is a part of TV project group aimed to deliver great experience in browsing TV schedule. 
+This application is a part of TV guide project aimed to deliver great experience in browsing TV schedule on TVGuía app. 
 
-This is xml parser which parses xmltv file format with TV schedule and puts it into MySQL database.
+This is an xml parser which parses xmltv file format with TV schedule and puts it into MySQL database.
 
 ## Contents: ##
 #### logger.py ####
@@ -18,3 +18,5 @@ Xml parsing class based on Xml ElementTree parser. Loads xmltv file and then par
 
 #### tvparser.py ####
 Application entry point. Creates Xml parser and runs it. 
+
+You will nee a config.ini file where script will find MySQL connection settings.
