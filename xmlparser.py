@@ -115,31 +115,31 @@ class XmlParser:
             # add programme or update if it exists
             result = self.__database.query("SELECT id, title, title_lang, end, duration, description "
                                            ", description FROM programme WHERE channel_id=" +
-                                           str(channel_id) + " AND begin=\'" + begin.strftime('%Y-%m-%d %H:%M:%S') +
+                                           str(channel_id) + " AND start=\'" + begin.strftime('%Y-%m-%d %H:%M:%S') +
                                            "\'")
             pid = -1
             if not result:
                 error(self.__database.error())
-            if result:
+            if result[1].__len__() > 0:
                 for programme_id, t, tl, e, d, desc, descl in result[1]:
                     pid = programme_id
                     if t != title or tl != title_lang or end.strftime('%Y-%m-%d %H:%M:%S') != \
-                            e.strftime('%Y-%m-%d %H:%M:%S') or d != duration or desc != description or descl != \
+                            e.strftime('%Y-%m-%d %H:%M:%S') or d != duration or desc != description.encode('utf-8') or descl != \
                             description_lang:
                         result = self.__database.query("UPDATE programme SET title=\'" + title + "\', title_lang=\'" +
                                                        title_lang + "\', end=\'" +
                                                        end.strftime('%Y-%m-%d %H:%M:%S') + "\', duration=\'" +
-                                                       duration.encode('utf-8') + "\', description=\'" + description +
+                                                       str(duration) + "\', description=\'" + description.encode('utf-8') +
                                                        "\', description_lang=\'" + description_lang +
-                                                       "\' WHERE id=" + pid.encode('utf-8'))
+                                                       "\' WHERE id=" + str(pid))
                         if result:
-                            info("Programme updated: " + pid.encode('utf-8'))
+                            info("Programme updated: " + str(pid))
                         else:
                             error(self.__database.error())
             else:
-                self.__database.prepare("INSERT INTO programme (title, title_lang, begin, end, duration, description, "
+                self.__database.prepare("INSERT INTO programme (title, title_lang, start, end, duration, description, "
                                         "description_lang, channel_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
-                result = self.__database.start((title, title_lang, begin, end, duration, description, description_lang,
+                result = self.__database.start((title, title_lang, begin, end, duration, description.encode('utf-8'), description_lang,
                                                channel_id))
                 if not result:
                     error(self.__database.error())
