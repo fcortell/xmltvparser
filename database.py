@@ -102,7 +102,7 @@ class Database:
         self.__connection.close()
 
     # runs prepared query with data
-    def exec(self, data=None):
+    def start(self, data=None):
         try:
             self.__cursor.execute(self.__query, data)
         except Error as err:
@@ -124,7 +124,7 @@ class Database:
     # run query
     def query(self, query):
         self.prepare(query)
-        run = self.exec()
+        run = self.start()
         return run
 
     # id of last inserted row
