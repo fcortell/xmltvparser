@@ -46,7 +46,7 @@ class XmlParser:
         self.__parse_channels()
         self.__parse_programme()
         self.__clean_up()
-        os.remove(self.__file)
+        #os.remove(self.__file)
         info('Parsing complete')
 
     # parse channel list
