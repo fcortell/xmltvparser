@@ -15,7 +15,8 @@ class Database:
         'database': parser.get('db', 'database'),
         'raise_on_warnings': parser.getboolean('db', 'raise_on_warnings'),
         'charset': parser.get('db', 'charset'),
-        'get_warnings': parser.getboolean('db', 'get_warnings')
+        'get_warnings': parser.getboolean('db', 'get_warnings'),
+        'use_unicode': parser.getboolean('db', 'use_unicode')
     }
 
     # initial tables

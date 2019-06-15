@@ -1,3 +1,6 @@
+# encoding: utf-8
+#!/usr/bin/python
+
 import gzip
 import os
 import shutil
@@ -124,9 +127,9 @@ class XmlParser:
                 for programme_id, t, tl, e, d, desc, descl in result[1]:
                     pid = programme_id
                     if t != title or tl != title_lang or end.strftime('%Y-%m-%d %H:%M:%S') != \
-                            e.strftime('%Y-%m-%d %H:%M:%S') or d != duration or desc != description.encode('utf-8') or descl != \
+                            e.strftime('%Y-%m-%d %H:%M:%S') or d != duration or desc.encode('utf-8') != description.encode('utf-8') or descl != \
                             description_lang:
-                        result = self.__database.query("UPDATE programme SET title=\'" + title + "\', title_lang=\'" +
+                        result = self.__database.query("UPDATE programme SET title=\'" + title.encode('utf-8') + "\', title_lang=\'" +
                                                        title_lang + "\', end=\'" +
                                                        end.strftime('%Y-%m-%d %H:%M:%S') + "\', duration=\'" +
                                                        str(duration) + "\', description=\'" + description.encode('utf-8') +
