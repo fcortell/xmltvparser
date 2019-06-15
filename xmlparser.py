@@ -13,15 +13,17 @@ from database import Database
 from logger import info, error, critical
 
 
-class XmlParser:
+class XmlParser(object):
     # source xml file
     __file = 'guide.xml'
     #__gz_file = '/tmp/xmltv.xml.gz'
     #__url = 'http://www.teleguide.info/download/new3/xmltv.xml.gz'
 
-    def __init__(self):
+    def __init__(self, country):
+        self.country = country
+        self.__file = 'guide_' + country + '.xml'
         # load xml file from remote hostNone
-        info('Loading xml file...')
+        info('Loading xml file...' + country + ' ' + self.__file)
         #r = requests.get(self.__url)
         #with open(self.__gz_file, 'wb') as output:
         #    output.write(r.content)
