@@ -211,7 +211,7 @@ class XmlParser(object):
     # clear old data
     def __clean_up(self):
         # remove old programme
-        result = self.__database.query("DELETE FROM programme WHERE end < DATE_SUB(NOW(), INTERVAL 7 DAY)")
+        result = self.__database.query("DELETE FROM programme WHERE end < DATE_SUB(NOW(), INTERVAL 1 DAY)")
         if result:
             info("Old programme removed")
         else:
