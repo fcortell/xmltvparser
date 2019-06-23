@@ -53,6 +53,7 @@ class Database:
             "   `description` TEXT,"
             "   `description_lang` VARCHAR(10),"
             "   `channel_id` INT NOT NULL,"
+            "   `insert_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,"
             "PRIMARY KEY (id),"
             "INDEX (id),"
             "UNIQUE (channel_id, start, end),"
