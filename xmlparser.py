@@ -72,9 +72,9 @@ class XmlParser(object):
                 if icon != self.__db_channels[channel_id]['icon'] or title != self.__db_channels[channel_id]['title'] \
                         or lang != self.__db_channels[channel_id]['lang']:
                     result = self.__database.query("UPDATE channels SET title=\'" + title + "\', lang=\'" + lang +
-                                                   "\', icon=\'" + icon + "\' WHERE id=" + channel_id.encode('utf-8'))
+                                                   "\', icon=\'" + icon + "\' WHERE id=" + repr(channel_id).encode('utf-8'))
                     if result:
-                        info("Channel updated: " + channel_id.encode('utf-8'))
+                        info("Channel updated: " + repr(channel_id).encode('utf-8'))
                     else:
                         error(self.__database.error())
                 continue
@@ -221,8 +221,8 @@ class XmlParser(object):
         self.__database.prepare("DELETE FROM channels WHERE id=%s")
         for channel_id in self.__db_channels.keys():
             if self.__db_channels[channel_id]['delete']:
-                result = self.__database.prepare("DELETE FROM channels WHERE id=" + channel_id.encode('utf-8'))
+                result = self.__database.prepare("DELETE FROM channels WHERE id=" + repr(channel_id).encode('utf-8'))
                 if not result:
                     error(self.__database.error())
                 else:
-                    info("Unknown channel removed " + channel_id.encode('utf-8'))
+                    info("Unknown channel removed " + repr(channel_id).encode('utf-8'))
